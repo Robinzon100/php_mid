@@ -49,16 +49,24 @@ class Queries{
         $stmt = $this->conn->prepare("DELETE FROM `products` WHERE `id`='$id'");
 
         $stmt->execute();
-        return "waishala " . $id;
+        
 
     }
+
+    function updateProduct($id, $name, $data){
+        $sql = "UPDATE `products` SET `name`='$name',`data` = '$data' WHERE `id`='$id'"; 
+        $result = $this->conn->query($sql); 
+        echo "You Updated in administratorRights "; 
+    }
+ 
 }
 
 
 
 
 $query = new Queries();
-if (isset($_POST['name']) || isset($_POST['id'])) {
+
+if (isset($_POST['name']) || isset($_POST['id']) || isset($_POST['data'])) {
     $action = $_POST['action'];
 
     switch($action) {
@@ -73,20 +81,26 @@ if (isset($_POST['name']) || isset($_POST['id'])) {
             $query->insertProduct($name, $amount, $data, $bar_code, $expiration, $input_date);
 
             return "product is added";
-
-
             break;
 
         case 'delete' : 
             $id = $_POST['id'];
-
             $query->deleteProduct($id);
+            return "waishala " . $id;
+            break;
 
-            return "product is added";
 
+        case 'update' : 
+            $name = $_POST['name'];
+            $data = $_POST['data'];
 
+            $query->updateProduct($id, $name, $data);
+
+            return "daapdeita " . $id;
             break;
     
+ 
+
     }
 }
 

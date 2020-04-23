@@ -25,8 +25,7 @@ foreach ($rows as $row) {
         echo "<p name='expiration' >".$row['expiration']."</p>";
         echo "<p name='input_date' >".$row['input_date']."</p>";
 
-        
-        echo "<button id='submit' data-id=".$row['id'].">edit this </button>";
+        echo "<a href='singleProductEdit.php/?id=".$row['id']."'>update this </a>";
 
     echo "</div>";
 }
